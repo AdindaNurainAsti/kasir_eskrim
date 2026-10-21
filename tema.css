@@ -1,0 +1,482 @@
+/* Kasir Es Krim - tema lucu: font, tombol permen, animasi (dipakai kedua halaman) */
+@font-face {
+  font-family: 'Fredoka';
+  src: url('../fonts/fredoka-latin.woff2') format('woff2');
+  font-weight: 300 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Nunito';
+  src: url('../fonts/nunito-latin.woff2') format('woff2');
+  font-weight: 200 1000;
+  font-display: swap;
+}
+:root {
+  --head: 'Fredoka', 'Arial Rounded MT Bold', ui-rounded, system-ui, sans-serif;
+  --body: 'Nunito', ui-rounded, 'Segoe UI', Roboto, system-ui, sans-serif;
+  --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+[hidden] {
+  display: none !important;
+}
+body {
+  font-family: var(--body);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(#2e6f5220 1.6px, transparent 1.8px),
+    radial-gradient(#ec5b8a1c 1.6px, transparent 1.8px);
+  background-size: 26px 26px;
+  background-position:
+    0 0,
+    13px 13px;
+}
+h1,
+h2,
+h3,
+.btn,
+.chip,
+.tile b,
+.it b,
+.hd b,
+.nav button,
+.seg button,
+.qty,
+.big,
+.amt,
+.k b,
+.ctl2 span,
+.bd,
+.nb,
+#bar b,
+.tt,
+.add,
+.step,
+.li b,
+.tag,
+.st {
+  font-family: var(--head);
+}
+h2 {
+  font-weight: 600;
+  font-size: 20px;
+}
+.mut {
+  color: var(--mut);
+}
+.tap {
+  cursor: pointer;
+}
+.empty {
+  text-align: center;
+}
+.c {
+  text-align: center;
+}
+.card {
+  border-radius: 26px;
+  box-shadow:
+    0 8px 0 #2e6f5210,
+    0 14px 26px #2e6f521a;
+}
+
+/* ===== Tombol permen ===== */
+.btn {
+  font-weight: 600;
+  box-shadow:
+    0 5px 0 #c23c6b,
+    0 12px 18px #ec5b8a44;
+  transition:
+    transform 0.15s var(--bounce),
+    box-shadow 0.15s;
+}
+.btn:active {
+  transform: translateY(4px);
+  box-shadow:
+    0 1px 0 #c23c6b,
+    0 3px 8px #ec5b8a44;
+}
+.btn.s {
+  box-shadow: 0 5px 0 #a6d3b7;
+}
+.btn.s:active {
+  box-shadow: 0 1px 0 #a6d3b7;
+}
+.btn.g {
+  box-shadow: 0 5px 0 #d2d6d4;
+}
+.btn.g:active {
+  box-shadow: 0 1px 0 #d2d6d4;
+}
+.chip,
+.tile,
+.it {
+  transition:
+    transform 0.18s var(--bounce),
+    border-color 0.15s,
+    background 0.15s;
+}
+.chip:active,
+.tile:active,
+.it:active {
+  transform: scale(0.92) rotate(-1.5deg);
+}
+.step,
+.ctl2 button {
+  transition: transform 0.15s var(--bounce);
+}
+
+/* ===== Header: taburan meses melayang dan es krim meleleh ===== */
+.hd::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, #ffffff77 2px, transparent 3px),
+    radial-gradient(circle, #f0c27bcc 3px, transparent 4px),
+    radial-gradient(circle, #ec5b8acc 2.5px, transparent 3.5px);
+  background-size:
+    64px 64px,
+    104px 88px,
+    84px 96px;
+  background-position:
+    0 0,
+    30px 40px,
+    60px 10px;
+  animation: drift 14s linear infinite;
+}
+.hd > * {
+  position: relative;
+  z-index: 1;
+}
+.hd::after {
+  transform-origin: top;
+  animation: melt 5s ease-in-out infinite;
+}
+.logo {
+  animation: wiggle 3.5s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+.hd b {
+  font-weight: 600;
+}
+
+/* ===== Maskot, banner, dan tempat logo ===== */
+.mascot {
+  display: block;
+  margin: 0 auto 6px;
+  width: 120px;
+  height: auto;
+  animation: bob 2.6s ease-in-out infinite;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 8px 10px #2e6f5233);
+}
+.hero {
+  border-radius: 26px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: 0 10px 22px #2e6f5233;
+  aspect-ratio: 16/8;
+}
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero.m {
+  display: grid;
+  place-items: center;
+  aspect-ratio: auto;
+  padding: 18px 0 10px;
+  background: linear-gradient(135deg, #e1f1e7, #fde4ec);
+}
+.logo-prev {
+  width: 78px;
+  height: 78px;
+  border-radius: 24px;
+  background: #fff;
+  border: 2px dashed var(--line);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex: none;
+}
+.logo-prev img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.logo-prev svg {
+  width: 46px;
+  height: 46px;
+}
+.banner-prev {
+  aspect-ratio: 16/7;
+  border: 2px dashed var(--line);
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: var(--mut);
+  background: #fff;
+  text-align: center;
+  padding: 8px;
+}
+.banner-prev img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+/* ===== Muncul membal ===== */
+main.in .tile,
+.in .it,
+.ord {
+  animation: boing 0.55s var(--bounce) both;
+}
+main.in .tile:nth-child(2) {
+  animation-delay: 0.05s;
+}
+main.in .tile:nth-child(3) {
+  animation-delay: 0.1s;
+}
+main.in .tile:nth-child(4) {
+  animation-delay: 0.15s;
+}
+main.in .tile:nth-child(n + 5) {
+  animation-delay: 0.2s;
+}
+main.in + .nav button.on span {
+  animation: hop 0.55s var(--bounce);
+}
+
+/* ===== Pesanan masuk ===== */
+.nav button span {
+  position: relative;
+}
+.nb {
+  position: absolute;
+  top: -3px;
+  right: -2px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 11px;
+  background: var(--pink);
+  color: #fff;
+  font-size: 13px;
+  font-style: normal;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 6px #0004;
+  animation: ring 1.6s ease-in-out infinite;
+  transform-origin: 50% 0;
+}
+.ord {
+  border-left: 9px solid var(--pink);
+}
+.ord.proses {
+  border-left-color: #e0a02e;
+}
+.oh {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.tag {
+  border-radius: 12px;
+  padding: 3px 11px;
+  font-size: 13px;
+  color: #fff;
+  background: var(--pink);
+}
+.tag.proses {
+  background: #d99a2b;
+}
+
+/* ===== Konfeti sukses ===== */
+.okp s {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 14px;
+  border-radius: 3px;
+  animation: conf 0.95s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+/* ===== Status pesanan (halaman pelanggan) ===== */
+.steps {
+  display: flex;
+  gap: 6px;
+  margin: 14px 0 6px;
+}
+.st {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  color: var(--mut);
+}
+.st i {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #e6ece8;
+  color: #fff;
+  margin: 0 auto 6px;
+  font-style: normal;
+  font-size: 16px;
+}
+.st.on i {
+  background: var(--g);
+  animation: boing 0.5s var(--bounce);
+}
+.st.cur i {
+  background: var(--pink);
+  animation: pulse2 1.2s ease-in-out infinite;
+}
+.st.on,
+.st.cur {
+  color: var(--ink);
+}
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 2px solid var(--pink);
+  border-radius: 20px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  font-family: var(--head);
+  box-shadow: 0 6px 0 #ec5b8a22;
+  animation: boing 0.5s var(--bounce) both;
+}
+.pill .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--pink);
+  animation: pulse2 1.2s infinite;
+  flex: none;
+}
+.pill span {
+  flex: 1;
+}
+
+@keyframes drift {
+  to {
+    background-position:
+      64px 64px,
+      134px 128px,
+      144px 106px;
+  }
+}
+@keyframes melt {
+  50% {
+    transform: scaleY(1.5);
+  }
+}
+@keyframes wiggle {
+  0%,
+  62%,
+  100% {
+    transform: rotate(0);
+  }
+  70% {
+    transform: rotate(-9deg);
+  }
+  80% {
+    transform: rotate(8deg);
+  }
+  90% {
+    transform: rotate(-4deg);
+  }
+}
+@keyframes bob {
+  50% {
+    transform: translateY(-9px) rotate(2.5deg);
+  }
+}
+@keyframes boing {
+  from {
+    opacity: 0;
+    transform: scale(0.6) translateY(22px);
+  }
+  60% {
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes hop {
+  40% {
+    transform: translateY(-11px) scale(1.15);
+  }
+}
+@keyframes ring {
+  0%,
+  40%,
+  100% {
+    transform: rotate(0);
+  }
+  5% {
+    transform: rotate(-18deg) scale(1.15);
+  }
+  10% {
+    transform: rotate(16deg) scale(1.15);
+  }
+  15% {
+    transform: rotate(-12deg);
+  }
+  20% {
+    transform: rotate(8deg);
+  }
+  25% {
+    transform: rotate(0);
+  }
+}
+@keyframes conf {
+  from {
+    transform: translate(0, 0) rotate(0) scale(0.5);
+    opacity: 1;
+  }
+  to {
+    transform: translate(var(--x), var(--y)) rotate(540deg) scale(1);
+    opacity: 0;
+  }
+}
+@keyframes pulse2 {
+  50% {
+    transform: scale(1.18);
+    box-shadow: 0 0 0 7px #ec5b8a33;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media print {
+  .hd::before {
+    display: none;
+  }
+  body {
+    background: #fff;
+  }
+}

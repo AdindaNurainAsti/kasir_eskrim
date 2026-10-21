@@ -1,0 +1,653 @@
+/* Kasir Es Krim - gaya tampilan aplikasi kasir */
+/* ===== Warna dasar ===== */
+:root {
+  --bg: #f4f9f5;
+  --card: #fff;
+  --ink: #23302a;
+  --mut: #6f7f76;
+  --g: #2e6f52;
+  --g2: #e1f1e7;
+  --pink: #ec5b8a;
+  --pink2: #fde4ec;
+  --mint: #d4ecdd;
+  --mint2: #2e6f52;
+  --tan: #f0c27b;
+  --red: #d9363e;
+  --line: #dfe9e2;
+}
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+html,
+body {
+  margin: 0;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font:
+    16px/1.4 ui-rounded,
+    'Arial Rounded MT Bold',
+    'Segoe UI',
+    Roboto,
+    system-ui,
+    sans-serif;
+  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+}
+/* ===== Header dengan tepi "leleh" ===== */
+.hd {
+  position: relative;
+  background: var(--g);
+  color: #fff;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) 16px 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 26px;
+  animation: down 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.hd::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -17px;
+  height: 18px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 18'%3E%3Cpath d='M0 0H120V4Q111 4 109 9Q107 17 101 17Q95 17 94 9Q92 4 84 4H62Q54 4 52 8Q50 13 45 13Q40 13 39 8Q37 4 30 4H0Z' fill='%232e6f52'/%3E%3C/svg%3E")
+    repeat-x;
+  background-size: 120px 18px;
+}
+.hd > div:not(.logo) {
+  flex: 1;
+  min-width: 0;
+}
+.hd b {
+  font-size: 20px;
+  display: block;
+  line-height: 1.15;
+}
+.hd small {
+  opacity: 0.85;
+  font-size: 13px;
+}
+.hd button {
+  background: #ffffff26;
+  color: #fff;
+  border: 0;
+  border-radius: 20px;
+  padding: 9px 14px;
+  font: inherit;
+  font-size: 14px;
+}
+.logo {
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex: none;
+  box-shadow: 0 3px 8px #0003;
+}
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.logo svg {
+  width: 30px;
+  height: 30px;
+}
+/* ===== Tata letak halaman dan kartu ===== */
+main {
+  padding: 0 14px;
+  max-width: 640px;
+  margin: auto;
+}
+main.in .card {
+  animation: up 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+main.in .card:nth-child(2) {
+  animation-delay: 0.07s;
+}
+main.in .card:nth-child(3) {
+  animation-delay: 0.14s;
+}
+main.in .card:nth-child(n + 4) {
+  animation-delay: 0.2s;
+}
+.card {
+  background: var(--card);
+  border-radius: 22px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 18px #2e6f5214;
+}
+h2 {
+  font-size: 18px;
+  margin: 0 0 10px;
+}
+h3 {
+  font-size: 14px;
+  margin: 14px 0 8px;
+  color: var(--mut);
+  font-weight: 600;
+}
+.ic {
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: -0.2em;
+}
+/* ===== Chip, kartu produk, dan foto ===== */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  border: 2px solid var(--line);
+  background: #fff;
+  border-radius: 14px;
+  padding: 10px 14px;
+  font: inherit;
+  color: var(--ink);
+  min-height: 44px;
+  transition: transform 0.12s;
+}
+.chip:active {
+  transform: scale(0.95);
+}
+.chip.on {
+  border-color: var(--g);
+  background: var(--g2);
+  color: var(--g);
+  font-weight: 700;
+}
+.chip small {
+  display: block;
+  color: var(--mut);
+  font-weight: 400;
+  font-size: 12px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+@media (min-width: 460px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.tile {
+  position: relative;
+  border: 2px solid var(--line);
+  background: #fff;
+  border-radius: 18px;
+  padding: 7px 7px 10px;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  transition:
+    transform 0.12s,
+    border-color 0.15s,
+    background 0.15s;
+}
+.tile:active {
+  transform: scale(0.95);
+}
+.tile.on {
+  border-color: var(--g);
+  background: var(--g2);
+}
+.tile.on::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--g)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E")
+    center/14px no-repeat;
+  box-shadow: 0 2px 6px #0003;
+}
+.tile b {
+  font-size: 15px;
+  line-height: 1.2;
+  padding: 0 3px;
+}
+.tile small {
+  color: var(--mut);
+  font-size: 13px;
+  padding: 0 3px;
+}
+.th {
+  display: block;
+  aspect-ratio: 4/3;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.th img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.th i {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font:
+    800 34px ui-rounded,
+    sans-serif;
+  font-style: normal;
+}
+.th.sm {
+  width: 48px;
+  height: 48px;
+  aspect-ratio: auto;
+  margin: 0;
+  flex: none;
+  border-radius: 13px;
+}
+.th.sm i {
+  font-size: 20px;
+}
+/* ===== Form dan tombol ===== */
+input,
+select {
+  width: 100%;
+  font: inherit;
+  padding: 12px;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink);
+  min-height: 48px;
+}
+input:focus,
+select:focus,
+button:focus-visible {
+  outline: 3px solid #2e6f5244;
+  border-color: var(--g);
+}
+.amt {
+  font-size: 26px;
+  font-weight: 800;
+  text-align: right;
+}
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.row > * {
+  flex: 1;
+}
+.row > .fx {
+  flex: none;
+}
+.btn {
+  width: 100%;
+  border: 0;
+  border-radius: 16px;
+  padding: 14px;
+  font: inherit;
+  font-weight: 800;
+  font-size: 17px;
+  background: var(--pink);
+  color: #fff;
+  min-height: 52px;
+  box-shadow: 0 6px 14px #ec5b8a44;
+  transition: transform 0.12s;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn.s {
+  background: var(--mint);
+  color: #1b4a37;
+  box-shadow: none;
+}
+.btn.g {
+  background: #eceeed;
+  color: var(--ink);
+  box-shadow: none;
+}
+.btn.sm {
+  width: auto;
+  padding: 8px 12px;
+  font-size: 14px;
+  min-height: 38px;
+}
+.step {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--mint);
+  color: var(--g);
+  font-size: 26px;
+  font-weight: 800;
+  flex: none;
+  transition: transform 0.12s;
+}
+.step:active {
+  transform: scale(0.88);
+}
+.qty {
+  font-size: 26px;
+  font-weight: 800;
+  text-align: center;
+}
+/* ===== Pilihan tunai/QRIS dan daftar ===== */
+.seg {
+  display: flex;
+  background: #eceeed;
+  border-radius: 16px;
+  padding: 4px;
+}
+.seg button {
+  flex: 1;
+  border: 0;
+  background: none;
+  padding: 12px;
+  border-radius: 13px;
+  font: inherit;
+  font-weight: 700;
+  color: var(--mut);
+}
+.seg button.on {
+  background: #fff;
+  color: var(--g);
+  box-shadow: 0 2px 6px #0002;
+}
+.li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+.li:last-child {
+  border: 0;
+}
+.li small {
+  color: var(--mut);
+  display: block;
+  font-size: 13px;
+}
+.li b {
+  white-space: nowrap;
+}
+/* ===== Peringatan stok dan bar stok ===== */
+.warn {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: #fff1d6;
+  border: 2px solid #f0b43c;
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.warn .ic {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  color: #c77b00;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.bar {
+  height: 16px;
+  background: #e6ece8;
+  border-radius: 9px;
+  overflow: hidden;
+}
+.bar i {
+  display: block;
+  height: 100%;
+  background: var(--g);
+  border-radius: 9px;
+  transform-origin: left;
+}
+.bar.lo i {
+  background: var(--red);
+}
+main.in .bar i {
+  animation: grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both 0.2s;
+}
+.big {
+  font-size: 34px;
+  font-weight: 800;
+}
+/* ===== Navigasi bawah ===== */
+.nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  background: #fff;
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -6px 20px #2e6f521a;
+  padding: 6px 6px calc(6px + env(safe-area-inset-bottom, 0px));
+  z-index: 5;
+}
+.nav button {
+  flex: 1;
+  border: 0;
+  background: none;
+  padding: 4px 2px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--mut);
+}
+.nav button span {
+  display: block;
+  width: 54px;
+  margin: 0 auto 2px;
+  padding: 5px 0;
+  border-radius: 15px;
+  transition: background 0.2s;
+}
+.nav button .ic {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 0 auto;
+}
+.nav button.on {
+  color: var(--g);
+  font-weight: 800;
+}
+.nav button.on span {
+  background: var(--g2);
+}
+/* ===== Ringkasan laporan ===== */
+.k {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.k div {
+  background: var(--bg);
+  border-radius: 14px;
+  padding: 10px;
+}
+.k small {
+  color: var(--mut);
+  display: block;
+  font-size: 13px;
+}
+.k b {
+  font-size: 18px;
+}
+.net {
+  background: var(--mint) !important;
+  grid-column: 1/3;
+}
+.net.neg {
+  background: var(--pink2) !important;
+}
+.x {
+  background: none;
+  border: 0;
+  padding: 8px;
+  color: var(--mut);
+  border-radius: 10px;
+}
+.x .ic {
+  width: 20px;
+  height: 20px;
+}
+.x:active {
+  background: #0001;
+}
+/* ===== Toast dan animasi sukses ===== */
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(98px + env(safe-area-inset-bottom, 0px));
+  transform: translate(-50%, 16px);
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 20px;
+  opacity: 0;
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+  pointer-events: none;
+  z-index: 9;
+}
+#toast.on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.okp {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 30;
+}
+.okp svg {
+  width: 120px;
+  height: 120px;
+  animation: pop 0.95s both;
+  filter: drop-shadow(0 8px 16px #0003);
+}
+.okp circle {
+  fill: var(--g);
+}
+.okp path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 40;
+  animation: draw 0.4s 0.2s both;
+}
+/* ===== Animasi ===== */
+@keyframes down {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  25% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(1);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 40;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes pulse {
+  50% {
+    transform: scale(1.2);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* ===== Tampilan cetak (PDF dan QR) ===== */
+.ph {
+  display: none;
+}
+@media print {
+  body.pq main > .card:not(#qrc),
+  body.pq #qrc > *:not(#qrbox):not(.ph),
+  body.pq #qrbox .btn {
+    display: none !important;
+  }
+  .hd,
+  .nav,
+  .noprint,
+  #toast {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    padding: 0;
+  }
+  .card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    animation: none !important;
+  }
+  .ph {
+    display: block;
+    margin-bottom: 10px;
+  }
+  main {
+    max-width: none;
+  }
+}
